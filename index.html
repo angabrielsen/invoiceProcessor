@@ -29,20 +29,20 @@
 
     $.each(files, function(i, item) {
         jQuery.getJSON(item, function (data) {
-            filesData.push (data)
+            for (let step = 0; step < 1; step++) {
+                filesData.push(data)
 
-            console.log("ITERATIONS: ", i, filesData);
+                console.log(filesData)
+            }
         });
-
-        console.log("ITERATIONS FINAL: ", i, filesData);
     });
+
+    console.log("filesData: ", filesData, "length: ", filesData.length)
 
     var app = Elm.Main.init({
         node: document.getElementById("elm-app-is-loaded-here"),
         flags: filesData
     });
-
-    console.log(filesData);
 </script>
 </body>
 </html>
