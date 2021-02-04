@@ -19,20 +19,30 @@
 
 <script src="elm.js"></script>
 <script>
-    var file = "./53265202.json"
+    const files = [ "./data/53265202.json",
+                    "./data/53414533.json",
+                    "./data/53556494.json",
+                    "./data/53833455.json",
+                    "./data/54608094.json" ];
 
-    // here I'd find all the files w/ .json and pump them into mockdata setting each one up as it's string of JSON passed into the elm
-    var mockData =
-        jQuery.getJSON(file, function (data) {
-            setFlags(data)
+    var filesData = [];
+
+    $.each(files, function(i, item) {
+        jQuery.getJSON(item, function (data) {
+            filesData.push (data)
+
+            console.log("ITERATIONS: ", i, filesData);
         });
 
-    function setFlags(data) {
-        var app = Elm.Main.init({
-            node: document.getElementById("elm-app-is-loaded-here"),
-            flags: data
-        });
-    }
+        console.log("ITERATIONS FINAL: ", i, filesData);
+    });
+
+    var app = Elm.Main.init({
+        node: document.getElementById("elm-app-is-loaded-here"),
+        flags: filesData
+    });
+
+    console.log(filesData);
 </script>
 </body>
 </html>

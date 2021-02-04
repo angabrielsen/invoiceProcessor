@@ -5414,6 +5414,7 @@ var $elm$core$Result$isOk = function (result) {
 	}
 };
 var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$array = _Json_decodeArray;
 var $elm$json$Json$Decode$map = _Json_map1;
 var $elm$json$Json$Decode$map2 = _Json_map2;
 var $elm$json$Json$Decode$succeed = _Json_succeed;
@@ -10537,9 +10538,9 @@ var $elm$core$Basics$never = function (_v0) {
 	}
 };
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$init = function (mockData) {
+var $author$project$Main$init = function (data) {
 	return _Utils_Tuple2(
-		{mockData: mockData},
+		{invoices: data},
 		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
@@ -10574,6 +10575,13 @@ var $author$project$Invoice$viewFields = function (invoice) {
 			]));
 };
 var $author$project$Invoice$viewInvoice = function (invoices) {
+	var invoice = A2(
+		$elm$core$Maybe$withDefault,
+		_List_fromArray(
+			[
+				{chars: '', height: 0, left: 0, top: 0, width: 0}
+			]),
+		A2($elm$core$Array$get, 0, invoices));
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -10598,7 +10606,7 @@ var $author$project$Invoice$viewInvoice = function (invoices) {
 					[
 						A2($elm$html$Html$Attributes$style, 'position', 'relative')
 					]),
-				A2($elm$core$List$map, $author$project$Invoice$viewFields, invoices))
+				A2($elm$core$List$map, $author$project$Invoice$viewFields, invoice))
 			]));
 };
 var $author$project$Main$view = function (model) {
@@ -10635,38 +10643,39 @@ var $author$project$Main$view = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$Invoice$viewInvoice(model.mockData)
+						$author$project$Invoice$viewInvoice(model.invoices)
 					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$list(
-		A2(
-			$elm$json$Json$Decode$andThen,
-			function (width) {
-				return A2(
-					$elm$json$Json$Decode$andThen,
-					function (top) {
-						return A2(
-							$elm$json$Json$Decode$andThen,
-							function (left) {
-								return A2(
-									$elm$json$Json$Decode$andThen,
-									function (height) {
-										return A2(
-											$elm$json$Json$Decode$andThen,
-											function (chars) {
-												return $elm$json$Json$Decode$succeed(
-													{chars: chars, height: height, left: left, top: top, width: width});
-											},
-											A2($elm$json$Json$Decode$field, 'chars', $elm$json$Json$Decode$string));
-									},
-									A2($elm$json$Json$Decode$field, 'height', $elm$json$Json$Decode$float));
-							},
-							A2($elm$json$Json$Decode$field, 'left', $elm$json$Json$Decode$float));
-					},
-					A2($elm$json$Json$Decode$field, 'top', $elm$json$Json$Decode$float));
-			},
-			A2($elm$json$Json$Decode$field, 'width', $elm$json$Json$Decode$float))))({"versions":{"elm":"0.19.1"},"types":{"message":"Msg.Msg","aliases":{},"unions":{"Msg.Msg":{"args":[],"tags":{"NoOp":[]}}}}})}});}(this));
+	$elm$json$Json$Decode$array(
+		$elm$json$Json$Decode$list(
+			A2(
+				$elm$json$Json$Decode$andThen,
+				function (width) {
+					return A2(
+						$elm$json$Json$Decode$andThen,
+						function (top) {
+							return A2(
+								$elm$json$Json$Decode$andThen,
+								function (left) {
+									return A2(
+										$elm$json$Json$Decode$andThen,
+										function (height) {
+											return A2(
+												$elm$json$Json$Decode$andThen,
+												function (chars) {
+													return $elm$json$Json$Decode$succeed(
+														{chars: chars, height: height, left: left, top: top, width: width});
+												},
+												A2($elm$json$Json$Decode$field, 'chars', $elm$json$Json$Decode$string));
+										},
+										A2($elm$json$Json$Decode$field, 'height', $elm$json$Json$Decode$float));
+								},
+								A2($elm$json$Json$Decode$field, 'left', $elm$json$Json$Decode$float));
+						},
+						A2($elm$json$Json$Decode$field, 'top', $elm$json$Json$Decode$float));
+				},
+				A2($elm$json$Json$Decode$field, 'width', $elm$json$Json$Decode$float)))))({"versions":{"elm":"0.19.1"},"types":{"message":"Msg.Msg","aliases":{},"unions":{"Msg.Msg":{"args":[],"tags":{"NoOp":[]}}}}})}});}(this));

@@ -1,5 +1,6 @@
 module Main exposing (main)
 
+import Array exposing(..)
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -15,7 +16,7 @@ view model =
                  [ text "Let's parse some invoices!" ]
              ]
         , div []
-            [ viewInvoice model.mockData ]
+            [ viewInvoice model.invoices ]
         ]
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -28,11 +29,11 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
-init : List Invoice -> ( Model, Cmd Msg )
-init mockData =
-    ( { mockData = mockData }, Cmd.none )
+init : Array (List Invoice) -> ( Model, Cmd Msg )
+init data =
+    ( { invoices = data }, Cmd.none )
 
-main : Program (List Invoice) Model Msg
+main : Program (Array (List Invoice)) Model Msg
 main =
     Browser.element
         { init = init

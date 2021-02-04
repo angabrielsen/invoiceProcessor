@@ -1,7 +1,9 @@
 module Msg exposing (Model, Invoice, Msg(..))
 
+import Array exposing (..)
+
 type alias Model =
-    { mockData : List Invoice }
+    { invoices : Array (List Invoice) }
 
 type alias Invoice =
     { left : Float
@@ -10,7 +12,6 @@ type alias Invoice =
     , height : Float
     , chars : String
     }
-
 
 type Msg
     = NoOp

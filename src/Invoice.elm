@@ -1,18 +1,31 @@
 module Invoice exposing (viewInvoice)
 
+import Array exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Msg exposing (Model, Invoice, Msg)
 import Regex exposing (..)
 import String exposing (String)
 
-viewInvoice : List Invoice -> Html msg
+viewInvoice : Array (List Invoice) -> Html msg
 viewInvoice invoices =
+    let
+        invoice =
+            Array.get 0 invoices
+            |> Maybe.withDefault
+                [   { left = 0
+                    , top = 0
+                    , width = 0
+                    , height = 0
+                    , chars = ""
+                    }
+                ]
+    in
     div []
         [ div []
             [ h1 [] [ text  "Invoices" ] ]
         , div [ style "position" "relative" ]
-            (List.map viewFields invoices)
+            (List.map viewFields invoice)
         ]
 
 viewFields : Invoice -> Html msg
