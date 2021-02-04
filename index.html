@@ -27,8 +27,6 @@
 
     var filesData = [];
 
-    console.log(filesData)
-
     $.when(
         $.each(files, function(i, item) {
             $.getJSON(item, function(data) {
@@ -38,8 +36,6 @@
     ).done(setFlags(filesData))
 
     function setFlags(data) {
-        console.log(data)
-
         var app = Elm.Main.init({
             node: document.getElementById("elm-app-is-loaded-here"),
             flags: data
