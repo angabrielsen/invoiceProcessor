@@ -25,27 +25,25 @@
                     "./data/53833455.json",
                     "./data/54608094.json" ];
 
-    const filesData = [];
+    var filesData = [[]];
+
+    console.log(filesData)
 
     $.each(files, function(i, item) {
-        jQuery.getJSON(item, function (data) {
-            var arr = [];
+        $.when(
+            $.getJSON(item, function(data) {
+                filesData.push(data)
 
-            for (let step = 0; step < 1; step++) {
-                arr.push(data)
-
-                console.log("arr1: ", arr)
-            }
-
-            setFlags(arr)
-
-            console.log("arr2: ", arr)
-        });
+                setFlags(filesData)
+            })
+        )
     });
 
-    console.log("filesData: ", filesData, "length: ", filesData.length)
+    console.log("final: ", filesData)
 
     function setFlags(data) {
+        console.log(data)
+
         var app = Elm.Main.init({
             node: document.getElementById("elm-app-is-loaded-here"),
             flags: data
