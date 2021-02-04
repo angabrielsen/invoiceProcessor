@@ -25,24 +25,32 @@
                     "./data/53833455.json",
                     "./data/54608094.json" ];
 
-    var filesData = [];
+    const filesData = [];
 
     $.each(files, function(i, item) {
         jQuery.getJSON(item, function (data) {
-            for (let step = 0; step < 1; step++) {
-                filesData.push(data)
+            var arr = [];
 
-                console.log(filesData)
+            for (let step = 0; step < 1; step++) {
+                arr.push(data)
+
+                console.log("arr1: ", arr)
             }
+
+            setFlags(arr)
+
+            console.log("arr2: ", arr)
         });
     });
 
     console.log("filesData: ", filesData, "length: ", filesData.length)
 
-    var app = Elm.Main.init({
-        node: document.getElementById("elm-app-is-loaded-here"),
-        flags: filesData
-    });
+    function setFlags(data) {
+        var app = Elm.Main.init({
+            node: document.getElementById("elm-app-is-loaded-here"),
+            flags: data
+        });
+    }
 </script>
 </body>
 </html>
