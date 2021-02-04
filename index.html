@@ -27,15 +27,23 @@
 
     var filesData = [];
 
+    console.log(filesData)
+
     $.when(
-        $.each(files, function(i, item) {
-            $.getJSON(item, function(data) {
+        $.each(files, function(i, file) {
+            $.getJSON(file, function(data) {
                 filesData.push(data)
+            }).done(function(data) {
+                console.log(data)
             })
         })
-    ).done(setFlags(filesData))
+    )
+
+    console.log("final: ", filesData.length)
 
     function setFlags(data) {
+        console.log(data)
+
         var app = Elm.Main.init({
             node: document.getElementById("elm-app-is-loaded-here"),
             flags: data
