@@ -25,21 +25,17 @@
                     "./data/53833455.json",
                     "./data/54608094.json" ];
 
-    var filesData = [[]];
+    var filesData = [];
 
     console.log(filesData)
 
-    $.each(files, function(i, item) {
-        $.when(
+    $.when(
+        $.each(files, function(i, item) {
             $.getJSON(item, function(data) {
                 filesData.push(data)
-
-                setFlags(filesData)
             })
-        )
-    });
-
-    console.log("final: ", filesData)
+        })
+    ).done(setFlags(filesData))
 
     function setFlags(data) {
         console.log(data)
